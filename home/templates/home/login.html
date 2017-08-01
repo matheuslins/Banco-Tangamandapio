@@ -1,0 +1,24 @@
+{% load static %}
+
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>EasyBank - Login</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+
+</head>
+
+<body>
+  <div class="login">
+	<h1>Login</h1>
+    <form method="post">{% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary btn-block btn-large">Entrar</button>
+    </form>
+  </form>
+  </div>
+</body>
+</html>
