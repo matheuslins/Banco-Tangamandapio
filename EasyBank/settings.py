@@ -44,6 +44,8 @@ THIRD_PARTY_APPS = (
 
 PROJECT_APPS = (
     # Project apps:
+    'home',
+    'conta',
 )
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + PROJECT_APPS
