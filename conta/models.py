@@ -18,3 +18,19 @@ class Conta(models.Model):
     class Meta:
         verbose_name = 'Conta'
         verbose_name_plural = 'Contas'
+
+
+# class Caixa(models.Model):
+#
+#     moeda = models.CharField(max_length=100,
+#                             verbose_name='Nome')
+#     saldo = models.DecimalField(max_digits=8,
+#                                 decimal_places=2,
+#                                 verbose_name='Saldo')
+#
+#     def __str__(self):
+#         return self.nome + ' -> ' + 'R$' + str(self.saldo)
+#
+#     class Meta:
+#         verbose_name = 'Conta'
+#         verbose_name_plural = 'Contas'

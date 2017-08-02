@@ -312,7 +312,7 @@ function novaConta() {
 		'csrfmiddlewaretoken': '{{ csrf_token }}'
 		},
 		function (data) {
-			mostraModal('Nova conta', 'Nova conta #' + data.id + ' de ' + data.nome + ' com P$ ' + data.saldo);
+			mostraModal('Nova conta', 'Nova conta #' + data.id + ' de ' + data.nome + ' com R$ ' + data.saldo);
 	});
 }
 
@@ -322,12 +322,29 @@ function saldoConta() {
 	});
 }
 
+function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+        }
+    }
+});
+
 function mudarConta() {
-	$.post($("#requrl").val() + 'conta/' + $("#mudaid").val() + '/', {
-		"nome": $("#mudanome").val(),
-		"saldo": $("#mudasaldo").val()
-			}, function (data) {
-		mostraModal('Conta modificada', 'Conta de ' + data.nome + ' com P$ ' + data.saldo);
+	$.ajax({
+    type: 'PUT',
+    url: $("#requrl").val() + $("#mudaid").val() + '/contas/',
+    data: {
+			"nome": $("#mudanome").val(),
+			"saldo": $("#mudasaldo").val(),
+		},
+		success: function (data) {
+			mostraModal('Conta modificada', 'Conta de ' + data.nome + ' com R$ ' + data.saldo);
+		}
 	});
 }
 
