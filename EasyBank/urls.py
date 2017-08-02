@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^', include('home.urls', namespace='home')),
-    url(r'^conta/', include('conta.urls', namespace='conta')),
+    url(r'^api/', include('conta.urls', namespace='conta')),
     url(r'^admin/', include(admin.site.urls)),
 ]
 if settings.DEBUG:
