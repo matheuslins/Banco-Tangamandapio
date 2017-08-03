@@ -121,31 +121,45 @@
 			</div>
 			<div class="mdl-card__supporting-text">
 			<div class="mdl-textfield mdl-js-textfield">
-				<input class="mdl-textfield__input" type="text" id="caixa1">
+				<input type="text" id="id1" value="1" hidden="hidden">
+				<input type="text" id="cedula1" value="1" hidden="hidden">
+				<input class="mdl-textfield__input" type="text" id="quantidade1">
 				<label class="mdl-textfield__label" for="caixa1">Cédulas de 1</label>
 			</div>
 			<div class="mdl-textfield mdl-js-textfield">
-				<input class="mdl-textfield__input" type="text" id="caixa2">
+				<input type="text" id="id2" value="2" hidden="hidden">
+				<input type="text" id="cedula2" value="2" hidden="hidden">
+				<input class="mdl-textfield__input" type="text" id="quantidade2">
 				<label class="mdl-textfield__label" for="caixa2">Cédulas de 2</label>
 			</div>
 			<div class="mdl-textfield mdl-js-textfield">
-				<input class="mdl-textfield__input" type="text" id="caixa5">
+				<input type="text" id="id5" value="5" hidden="hidden">
+				<input type="text" id="cedula5" value="5" hidden="hidden">
+				<input class="mdl-textfield__input" type="text" id="quantidade5">
 				<label class="mdl-textfield__label" for="caixa5">Cédulas de 5</label>
 			</div>
 			<div class="mdl-textfield mdl-js-textfield">
-				<input class="mdl-textfield__input" type="text" id="caixa10">
+				<input  type="text" id="id10" value="10" hidden="hidden">
+				<input type="text" id="cedula10" value="10" hidden="hidden">
+				<input class="mdl-textfield__input" type="text" id="quantidade10">
 				<label class="mdl-textfield__label" for="caixa10">Cédulas de 10</label>
 			</div>
 			<div class="mdl-textfield mdl-js-textfield">
-				<input class="mdl-textfield__input" type="text" id="caixa20">
+				<input type="text" id="id20" value="20" hidden="hidden">
+				<input type="text" id="cedula20" value="20" hidden="hidden">
+				<input class="mdl-textfield__input" type="text" id="quantidade20">
 				<label class="mdl-textfield__label" for="caixa20">Cédulas de 20</label>
 			</div>
 			<div class="mdl-textfield mdl-js-textfield">
-				<input class="mdl-textfield__input" type="text" id="caixa50">
+				<input type="text" id="id50" value="50" hidden="hidden">
+				<input type="text" id="cedula50" value="50" hidden="hidden">
+				<input class="mdl-textfield__input" type="text" id="quantidade50">
 				<label class="mdl-textfield__label" for="caixa50">Cédulas de 50</label>
 			</div>
 			<div class="mdl-textfield mdl-js-textfield">
-				<input class="mdl-textfield__input" type="text" id="caixa100">
+				<input type="text" id="id100" value="100" hidden="hidden">
+				<input type="text" id="cedula100" value="100" hidden="hidden">
+				<input class="mdl-textfield__input" type="text" id="quantidade100">
 				<label class="mdl-textfield__label" for="caixa100">Cédulas de 100</label>
 			</div>
 			</div>
@@ -357,26 +371,23 @@ function saqueConta() {
 }
 
 function estoqueCaixa() {
-	$.post($("#requrl").val() + 'caixa/', {
-		"1": $("#caixa1").val(),
-		"2": $("#caixa2").val(),
-		"5": $("#caixa5").val(),
-		"10": $("#caixa10").val(),
-		"20": $("#caixa20").val(),
-		"50": $("#caixa50").val(),
-		"100": $("#caixa100").val()
-			}, function (data) {
-		$("#ced1").text(data["1"]);
-		$("#ced2").text(data["2"]);
-		$("#ced5").text(data["5"]);
-		$("#ced10").text(data["10"]);
-		$("#ced20").text(data["20"]);
-		$("#ced50").text(data["50"]);
-		$("#ced100").text(data["100"]);
+	var CEDULAS = {1: "1", 2: "2", 3: "5", 4: "10", 5: "20", 6: "50", 7: "100"}
 
-		snackbarContainer.MaterialSnackbar.showSnackbar({message: "Estoque do caixa eletrônico atualizado."});
-
-	});
+	for (var i = 1; i < 8; i++) {
+		var num = i.toString()
+		$.ajax({
+	    type: 'PUT',
+	    url: $("#requrl").val() + $("#id"+CEDULAS[num]).val() + '/caixa/',
+	    data: {
+				"cedula": $("#cedula"+CEDULAS[num]).val(),
+				"quantidade": $("#quantidade"+CEDULAS[num]).val(),
+			},
+			success: function (data) {
+				$("#ced"+CEDULAS[num]).text(data[CEDULAS[num]]["quantidade"]);
+			}
+		});
+	}
+	snackbarContainer.MaterialSnackbar.showSnackbar({message: "Estoque do caixa eletrônico atualizado."});
 }
 
 function mostraModal(titulo, conteudo) {
