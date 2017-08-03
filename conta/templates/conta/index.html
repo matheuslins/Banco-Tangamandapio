@@ -292,13 +292,13 @@ function atualizaContas() {
 
 function atualizaEstoque() {
 	$.get($("#requrl").val() + 'caixa/', function (data) {
-		$("#ced1").text(data["1"]);
-		$("#ced2").text(data["2"]);
-		$("#ced5").text(data["5"]);
-		$("#ced10").text(data["10"]);
-		$("#ced20").text(data["20"]);
-		$("#ced50").text(data["50"]);
-		$("#ced100").text(data["100"]);
+		$("#ced1").text(data["0"]["quantidade"]);
+		$("#ced2").text(data["1"]["quantidade"]);
+		$("#ced5").text(data["2"]["quantidade"]);
+		$("#ced10").text(data["3"]["quantidade"]);
+		$("#ced20").text(data["4"]["quantidade"]);
+		$("#ced50").text(data["5"]["quantidade"]);
+		$("#ced100").text(data["6"]["quantidade"]);
 
 		snackbarContainer.MaterialSnackbar.showSnackbar({message: "Estoque do caixa eletrônico atualizado."});
 

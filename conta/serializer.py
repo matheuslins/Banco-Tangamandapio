@@ -1,10 +1,15 @@
 
 from rest_framework import serializers
-from .models import Conta
+from .models import Conta, Caixa
 
 
 class ContaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Conta
-        depth = 1
         fields = ['id', 'nome', 'saldo']
+
+
+class CaixaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Caixa
+        fields = ['cedula', 'quantidade']
