@@ -13,7 +13,7 @@ class Conta(models.Model):
                                 verbose_name='Saldo')
 
     def __str__(self):
-        return self.nome + ' -> ' + 'R$' + str(self.saldo)
+        return self.nome + ' -> ' + 'P$' + str(self.saldo)
 
     class Meta:
         verbose_name = 'Conta'
@@ -30,3 +30,20 @@ class Caixa(models.Model):
     class Meta:
         verbose_name = 'Caixa'
         verbose_name_plural = 'Caixas'
+
+
+class Saque(models.Model):
+    conta = models.ForeignKey(
+        Conta,
+        on_delete=models.CASCADE,
+        related_name="conta_saque",
+        verbose_name='id_conta'
+    )
+    valor = models.IntegerField()
+
+    def __str__(self):
+        return str(self.conta.nome) + ' sacou R$' + str(self.valor)
+
+    class Meta:
+        verbose_name = 'Saque'
+        verbose_name_plural = 'Saques'

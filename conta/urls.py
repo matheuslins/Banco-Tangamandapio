@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from .views import (HomeContaView, ListContasView, DetailContasView,
-                    ListCaixaView, DetailCaixaView)
+                    ListCaixaView, DetailCaixaView, CreateSaqueView)
 
 urlpatterns = [
 
@@ -18,6 +18,10 @@ urlpatterns = [
         name='list_caixa'),
     url(r'^(?P<pk>\d+)/caixa/$',
         DetailCaixaView.as_view(),
-        name='detail_caixa')
+        name='detail_caixa'),
+    # Urls saque
+    url(r'^(?P<pk>\d+)/conta/saque/$',
+        CreateSaqueView.as_view(),
+        name='query_saque'),
 
 ]
