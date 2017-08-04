@@ -6,9 +6,12 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 from rest_framework import generics
+from rest_framework import status
+from rest_framework.response import Response
 
 from .models import Conta, Caixa, Saque
 from .serializer import ContaSerializer, CaixaSerializer, SaqueSerializer
+from .utils import sacar
 
 
 @method_decorator(login_required, name='dispatch')
@@ -40,7 +43,15 @@ class DetailCaixaView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CaixaSerializer
 
 
+class SaqueSuccessMixin(object):
+    def dispatch(self, request, *args, **kwargs):
+        response = super(SaqueSuccessMixin, self).dispatch(request, *args, **kwargs)  # noqa
+        if response.status_code == 201:
+            sacar(response, Conta.objects.get(pk=response.data['conta']))
+        return response
+
+
 @method_decorator(login_required, name='dispatch')
-class CreateSaqueView(generics.CreateAPIView):
+class CreateSaqueView(SaqueSuccessMixin, generics.CreateAPIView):
     queryset = Saque.objects.all()
     serializer_class = SaqueSerializer

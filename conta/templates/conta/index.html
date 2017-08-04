@@ -357,7 +357,7 @@ function mudarConta() {
 			"saldo": $("#mudasaldo").val(),
 		},
 		success: function (data) {
-			mostraModal('Conta modificada', 'Conta de ' + data.nome + ' com R$ ' + data.saldo);
+			mostraModal('Conta modificada', 'Conta de ' + data.nome + ' com P$ ' + data.saldo);
 		}
 	});
 }
@@ -367,7 +367,12 @@ function saqueConta() {
 		"conta": $("#saqueid").val(),
 		"valor": $("#saquevalor").val(),
 			}, function (data) {
-		mostraModal('Saque realizado', '<ul><li>'+data["1"]+' notas de P$ 1</li><li>'+data["2"]+' notas de P$ 2</li><li>'+data["5"]+' notas de P$ 5</li><li>'+data["10"]+' notas de P$ 10</li><li>'+data["20"]+' notas de P$ 20</li><li>'+data["50"]+' notas de P$ 50</li><li>'+data["100"]+' notas de P$ 100</li></ul>');
+				if(data['message']){
+					snackbarContainer.MaterialSnackbar.showSnackbar({message: data['message']});
+				}
+				else{
+					mostraModal('Saque realizado', '<ul><li>'+data["1"]+' notas de P$ 1</li><li>'+data["2"]+' notas de P$ 2</li><li>'+data["5"]+' notas de P$ 5</li><li>'+data["10"]+' notas de P$ 10</li><li>'+data["20"]+' notas de P$ 20</li><li>'+data["50"]+' notas de P$ 50</li><li>'+data["100"]+' notas de P$ 100</li></ul>');
+				}
 	});
 }
 
