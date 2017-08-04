@@ -1,5 +1,5 @@
 # Banco Tangamandápio
-### Simple API to consult, create, update accounts and make withdrawals.
+### Simple API to manage accounts and make withdrawals.
 
 ## Was made using
   * Django 1.11
