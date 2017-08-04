@@ -1,4 +1,4 @@
-# Banco Tangamandápio
+# Tangamandápio Bank
 ### Simple API to manage accounts and make withdrawals.
 
 ## Was made using
