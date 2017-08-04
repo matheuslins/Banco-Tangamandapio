@@ -371,7 +371,23 @@ function saqueConta() {
 					snackbarContainer.MaterialSnackbar.showSnackbar({message: data['message']});
 				}
 				else{
-					mostraModal('Saque realizado', '<ul><li>'+data["1"]+' notas de P$ 1</li><li>'+data["2"]+' notas de P$ 2</li><li>'+data["5"]+' notas de P$ 5</li><li>'+data["10"]+' notas de P$ 10</li><li>'+data["20"]+' notas de P$ 20</li><li>'+data["50"]+' notas de P$ 50</li><li>'+data["100"]+' notas de P$ 100</li></ul>');
+					var CEDULAS = {1: "1", 2: "2", 3: "5", 4: "10", 5: "20", 6: "50", 7: "100"}
+					var VALOR = data['caixa']
+					for (var i = 1; i < 8; i++) {
+						var num = i.toString()
+						$.ajax({
+					    type: 'PUT',
+					    url: $("#requrl").val() + $("#id"+CEDULAS[num]).val() + '/caixa/',
+					    data: {
+								"cedula": $("#cedula"+CEDULAS[num]).val(),
+								"quantidade": VALOR[parseInt(CEDULAS[i])],
+							},
+							success: function (data) {
+								$("#ced"+CEDULAS[num]).text(VALOR[i]);
+							}
+						});
+					}
+					mostraModal('Saque realizado', '<ul><li>'+data['cedulas'][1]+' notas de P$ 1</li><li>'+data['cedulas'][2]+' notas de P$ 2</li><li>'+data['cedulas'][5]+' notas de P$ 5</li><li>'+data['cedulas'][10]+' notas de P$ 10</li><li>'+data['cedulas'][20]+' notas de P$ 20</li><li>'+data['cedulas'][50]+' notas de P$ 50</li><li>'+data['cedulas'][100]+' notas de P$ 100</li></ul>');
 				}
 	});
 }

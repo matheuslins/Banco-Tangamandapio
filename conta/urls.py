@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from .views import (HomeContaView, ListContasView, DetailContasView,
-                    ListCaixaView, DetailCaixaView, CreateSaqueView)
+                    ListCaixaView, DetailCaixaView, CreateSaqueView,
+                    ListSaqueView)
 
 urlpatterns = [
 
