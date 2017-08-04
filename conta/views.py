@@ -48,3 +48,10 @@ class DetailCaixaView(generics.RetrieveUpdateDestroyAPIView):
 class CreateSaqueView(SaqueSuccessMixin, generics.CreateAPIView):
     queryset = Saque.objects.all()
     serializer_class = SaqueSerializer
+
+
+# Extra
+@method_decorator(login_required, name='dispatch')
+class ListSaqueView(generics.ListCreateAPIView):
+    queryset = Saque.objects.all()
+    serializer_class = SaqueSerializer

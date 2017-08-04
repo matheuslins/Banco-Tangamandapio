@@ -24,5 +24,8 @@ urlpatterns = [
     url(r'^(?P<pk>\d+)/conta/saque/$',
         CreateSaqueView.as_view(),
         name='query_saque'),
+    url(r'^(?P<pk>\d+)/conta/extrato/',
+        ListSaqueView.as_view(),
+        name='list_saque'),
 
 ]
