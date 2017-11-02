@@ -33,7 +33,6 @@ def retirar_caixa(valor, lista_cedulas, conta):
     qtd_cedulas = dict(lista_cedulas).values()
     cedulas = sorted(dict(lista_cedulas).keys(), key=int, reverse=True)
     total_caixa = sum(list(reduce(lambda x, y: x*y, cedula) for cedula in lista_cedulas))  # noqa
-    # import ipdb; ipdb.set_trace()
     # Passo 2
     if valor <= total_caixa:
         for idx, cedula in enumerate(cedulas):
